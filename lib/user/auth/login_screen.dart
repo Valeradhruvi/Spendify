@@ -4,7 +4,7 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 class LoginScreen extends StatefulWidget {
-   LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -12,18 +12,19 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
+  bool _obscureText = true;
 
-   bool _obscureText = true;
+  void _toggleVisibility() {
+    setState(() => _obscureText = !_obscureText);
+  }
 
-   void _toggleVisibility() {
-     setState(() => _obscureText = !_obscureText);
-   }
+  bool isAdmin(String email) {
+    return email.endsWith('@admin.com');
+  }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
@@ -101,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
                           hintText: 'Email',
                           hintStyle: const TextStyle(color: Colors.white70),
@@ -144,7 +146,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             onPressed: _toggleVisibility,
                           ),
-
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(color: Colors.white30),
@@ -162,8 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             return 'Password must be at least 6 characters';
                           }
                           return null;
-                          },
-
+                        },
                       ),
                       const SizedBox(height: 10),
 
@@ -172,7 +172,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/forgot');
-
                           },
                           child: const Text(
                             "Forgot Password?",
@@ -185,14 +184,19 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       ElevatedButton.icon(
                         onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
+                            final email = emailController.text.trim();
+                            if (isAdmin(email)) {
+                              Navigator.pushNamed(context, '/admindashboard');
+                            } else {
                               Navigator.pushNamed(context, '/bottomnav');
                             }
+                          }
                         },
                         icon: const Icon(Icons.login, color: Colors.white),
                         label: const Text(
                           "Login",
-                          style: TextStyle(fontSize: 16,color: Colors.white),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF00ADB5),

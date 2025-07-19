@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:spendify/dashboard/screen/data/feedback_repository.dart';
+import 'package:spendify/model/feedback_model.dart';
 
 class FeedbackScreen extends StatefulWidget {
   const FeedbackScreen({super.key});
@@ -18,28 +20,33 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
   String get currentTimestamp =>
       DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
+
   void _submitFeedback() {
     if (_formKey.currentState!.validate()) {
       final userId = userIdController.text.trim();
       final message = messageController.text.trim();
+      final timestamp = DateTime.now();
 
-      // Handle feedback submission logic here (e.g., store to database, send to server)
-      debugPrint("User ID: $userId");
-      debugPrint("Rating: $rating");
-      debugPrint("Message: $message");
-      debugPrint("Timestamp: $currentTimestamp");
+      final newFeedback = {
+        'userId': userId,
+        'rating': rating,
+        'message': message,
+        'timestamp': timestamp,
+      };
+
+      FeedbackRepository.addFeedback(newFeedback); // 🔥 Add to shared list
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Feedback submitted!")),
       );
-      Navigator.pop(context);
 
-      // Optionally clear fields
       userIdController.clear();
       messageController.clear();
       setState(() => rating = 0);
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {

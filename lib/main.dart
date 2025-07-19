@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:spendify/admin/admin_dashboard.dart';
+import 'package:spendify/admin/admin_feedback_screen.dart';
+import 'package:spendify/admin/model_retraining_screen.dart';
+import 'package:spendify/admin/report_modartion_screen.dart';
+import 'package:spendify/admin/user_managment_screen.dart';
 import 'package:spendify/analysis/sending_insight_screen.dart';
 import 'package:spendify/bank_sync/banksync_screen.dart';
 import 'package:spendify/dashboard/bottom_button/bottom_nav_bar.dart';
@@ -34,7 +39,7 @@ class FinanceOptimizerApp extends StatelessWidget {
       title: 'ML Finance Optimizer',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(), // Use your custom theme here
-      initialRoute: '/bottomnav',
+      initialRoute: '/login',
       routes: {
         '/splash': (context) =>  SplashScreen(),
         '/onboarding': (context) =>  OnboardingScreen(),
@@ -49,10 +54,16 @@ class FinanceOptimizerApp extends StatelessWidget {
         '/notificationscreen':(context)=>NotificationScreen(),
         '/editprofile':(context)=>EditProfilePage(username: 'darvi',email: 'dh@gail.com'),
         '/banksyncscreen':(context)=>BankSyncScreen(),
-        '/sendinginsightscreen':(context)=>AnalyticsChartsScreen(),
+        // '/sendinginsightscreen':(context)=>AnalyticsChartsScreen(),
+        'analysisscreen':(context)=>SpendingAnalysisScreen(),
         '/aboutscreen':(context)=>AboutAppScreen(),
         '/helpcenterscreen':(context)=>HelpCenterScreen(),
         '/feedbackscreen':(context)=>FeedbackScreen(),
+        '/admindashboard':(context)=>AdminDashboardScreen(),
+        '/usermanagement': (_) =>  UserManagementScreen(),
+        '/reportmoderation': (_) =>  ReportModerationScreen(),
+        '/feedbackdashboard': (_) =>  FeedbackDashboardScreen(),
+        '/modelretraining': (_) =>  ModelRetrainingScreen(),
 
         // '/home': (context) => const HomeScreen(), // Later
       },

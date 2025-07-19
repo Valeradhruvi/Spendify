@@ -44,6 +44,9 @@ class _HomeScreenState extends State<HomeScreen> {
           }),
           IconButton(icon: const Icon(Icons.upload_file), onPressed: () {
             Navigator.pushNamed(context, '/banksyncscreen');
+          }),
+          IconButton(icon: const Icon(Icons.admin_panel_settings), onPressed: () {
+            Navigator.pushNamed(context, '/admindashboard');
           })
         ],
       ),
