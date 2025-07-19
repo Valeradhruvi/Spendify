@@ -5,7 +5,9 @@ import 'package:spendify/transaction/add_transaction.dart';
 import 'package:spendify/transaction/transaction_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+
+   const HomeScreen({super.key,
+  });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

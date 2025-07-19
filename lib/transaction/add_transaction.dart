@@ -23,8 +23,8 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   DateTime? _date;
   String? _dateError;
 
-  final List<String> _categories = ['Food', 'Transport', 'Bills', 'Others'];
-  final List<String> _methods = ['Cash', 'Card', 'UPI'];
+  final List<String> _categories = ['Food', 'Travel', 'Shopping', 'Bills', 'Entertainment','Medical','Study','Others'];
+  final List<String> _methods = ['Cash', 'Credit Card','Debit Card','Bank Transfer','Net Banking' 'UPI','Other'];
 
   @override
   void initState() {
