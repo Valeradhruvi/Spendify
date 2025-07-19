@@ -4,12 +4,19 @@ import 'package:glassmorphism/glassmorphism.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:spendify/functions/authFunctions.dart';
 
-class LoginScreen extends StatelessWidget {
-   LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  bool _obscurePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +95,11 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      // Email Field
                       TextFormField(
                         controller: emailController,
                         decoration: InputDecoration(
                           hintText: 'Email',
-
                           hintStyle: const TextStyle(color: Colors.white70),
                           filled: true,
                           fillColor: Colors.transparent,
@@ -118,15 +125,27 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 20),
 
+                      // Password Field with Toggle
                       TextFormField(
                         controller: passwordController,
-                        obscureText: true,
+                        obscureText: _obscurePassword,
                         decoration: InputDecoration(
                           hintText: 'Password',
                           hintStyle: const TextStyle(color: Colors.white70),
                           filled: true,
                           fillColor: Colors.transparent,
                           prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _obscurePassword = !_obscurePassword;
+                              });
+                            },
+                          ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(color: Colors.white30),
@@ -144,8 +163,7 @@ class LoginScreen extends StatelessWidget {
                             return 'Password must be at least 6 characters';
                           }
                           return null;
-                          },
-
+                        },
                       ),
                       const SizedBox(height: 10),
 
@@ -154,7 +172,6 @@ class LoginScreen extends StatelessWidget {
                         child: TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, '/forgot');
-
                           },
                           child: const Text(
                             "Forgot Password?",
@@ -165,17 +182,18 @@ class LoginScreen extends StatelessWidget {
 
                       const SizedBox(height: 10),
 
+                      // Login Button
                       ElevatedButton.icon(
                         onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              signin(emailController.text.toString(), passwordController.text.toString());
-                              // Navigator.pushNamed(context, '/splash');
-                            }
+                          if (_formKey.currentState!.validate()) {
+                            signin(emailController.text.trim(), passwordController.text.trim());
+                            Navigator.pushNamed(context, '/bottomnavbar');
+                          }
                         },
                         icon: const Icon(Icons.login, color: Colors.white),
                         label: const Text(
                           "Login",
-                          style: TextStyle(fontSize: 16,color: Colors.white),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF00ADB5),
@@ -185,6 +203,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ).animate().fadeIn(delay: 300.ms),
+
                       const SizedBox(height: 10),
 
                       const Text("Or sign in with", style: TextStyle(color: Colors.white70)),

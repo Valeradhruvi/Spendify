@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:spendify/dashboard/bottom_button/bottom_nav_bar.dart';
+import 'package:spendify/dashboard/screen/home_screen.dart';
 import 'package:spendify/firebase_options.dart';
 import 'package:spendify/user/auth/forgot_pass_screen.dart';
 import 'package:spendify/user/auth/login_screen.dart';
@@ -25,14 +27,15 @@ class FinanceOptimizerApp extends StatelessWidget {
       title: 'ML Finance Optimizer',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(), // Use your custom theme here
-      initialRoute: '/splash',
+      initialRoute: '/bottomnavbar',
       routes: {
         '/splash': (context) =>  SplashScreen(),
         '/onboarding': (context) =>  OnboardingScreen(),
         '/login': (context) =>  LoginScreen(),
         '/forgot': (context) =>  ForgotPasswordScreen(),
         '/register': (context) =>  RegisterScreen(),
-        // '/home': (context) => const HomeScreen(), // Later
+        '/bottomnavbar':(context)=>BottomNavBar(),
+        // Later
       },
     );
   }

@@ -31,6 +31,7 @@ signin(String email, password) async {
   try {
     UserCredential userCredential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password);
+    String user_id = userCredential.user!.uid;
     print('/////// Success ////////');
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {

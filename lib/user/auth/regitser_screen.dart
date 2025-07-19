@@ -5,14 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:spendify/functions/database_fucntions.dart';
-
+import 'package:spendify/globalvariable/global.dart';
 import '../../functions/authFunctions.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
 
   final _formKey = GlobalKey<FormState>();
-  int count=100;
+
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -116,10 +116,13 @@ class RegisterScreen extends StatelessWidget {
                             // proceed with registration logic
                             _formKey.currentState!.save();
                             signup(emailController.text, passwordController.text, nameController.text);
-                            count++;
-                            createData('users' ,count.toString() , nameController.text.toString() , emailController.text.toString() , passwordController.text.toString());
+                            global_user_id++;
+                            print("before create : --------${global_user_id}");
+                            createData('users' ,global_user_id.toString() , nameController.text.toString() , emailController.text.toString() , passwordController.text.toString());
+                            print("After create : ------- ${global_user_id}");
+
                             // Navigator.pushNamed(context, '/home');
-                            await  FirebaseFirestore.instance.collection('admin').doc('A01').update({'userID':FieldValue.arrayUnion([count])}).then((value) => print('USER ADDED TO ADMIN'),);
+                            await  FirebaseFirestore.instance.collection('admin').doc('A01').update({'userID':FieldValue.arrayUnion([global_user_id])}).then((value) => print('USER ADDED TO ADMIN'),);
                             print('::::::::::::${FirebaseAuth.instance.currentUser?.uid}:::::::::');
                           }
                         },
