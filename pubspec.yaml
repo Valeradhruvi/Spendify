@@ -34,6 +34,10 @@ dependencies:
   glassmorphism: ^3.0.0
   flutter_animate:
   intl:
+  path_provider:
+  printing:
+  pdf:
+  file_picker:
 
 
 

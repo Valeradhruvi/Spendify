@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:spendify/transaction/add_transaction.dart';
-import 'package:spendify/transaction/transaction_model.dart';
+import 'package:spendify/model/transaction_model.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -39,7 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color(0xFF00ADB5),
         title: const Text("Dashboard"),
         actions: [
-          IconButton(icon: const Icon(Icons.notifications), onPressed: () {})
+          IconButton(icon: const Icon(Icons.notifications), onPressed: () {
+            Navigator.pushNamed(context, '/notificationscreen');
+          }),
+          IconButton(icon: const Icon(Icons.upload_file), onPressed: () {
+            Navigator.pushNamed(context, '/banksyncscreen');
+          })
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -131,11 +136,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         IconButton(
                           icon: const Icon(Icons.delete, color: Colors.redAccent, size: 20),
                           onPressed: () {
-                            setState(() {
-                              transactions.removeAt(index);
-                            });
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: const Color(0xFF1B1B2F),
+                                  title: const Text("Delete Transaction", style: TextStyle(color: Colors.white)),
+                                  content: const Text("Are you sure you want to delete this transaction?", style: TextStyle(color: Colors.white70)),
+                                  actions: [
+                                    TextButton(
+                                      child: const Text("Cancel", style: TextStyle(color: Colors.grey)),
+                                      onPressed: () => Navigator.of(context).pop(),
+                                    ),
+                                    TextButton(
+                                      child: const Text("Yes", style: TextStyle(color: Colors.redAccent)),
+                                      onPressed: () {
+                                        setState(() {
+                                          transactions.removeAt(index);
+                                        });
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
                           },
-                        ),
+                        )
                       ],
                     ),
                   );

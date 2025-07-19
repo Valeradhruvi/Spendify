@@ -3,14 +3,27 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
    LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
-  @override
+   bool _obscureText = true;
+
+   void _toggleVisibility() {
+     setState(() => _obscureText = !_obscureText);
+   }
+
+   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
@@ -117,13 +130,21 @@ class LoginScreen extends StatelessWidget {
 
                       TextFormField(
                         controller: passwordController,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         decoration: InputDecoration(
                           hintText: 'Password',
                           hintStyle: const TextStyle(color: Colors.white70),
                           filled: true,
                           fillColor: Colors.transparent,
                           prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText ? Icons.visibility_off : Icons.visibility,
+                              color: Colors.white70,
+                            ),
+                            onPressed: _toggleVisibility,
+                          ),
+
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(color: Colors.white30),
