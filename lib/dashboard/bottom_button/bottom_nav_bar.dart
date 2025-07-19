@@ -13,12 +13,11 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _currentIndex = 0;
-  List<Transaction> _transaction = [];
 
   final List<Widget> _pages = [
     const HomeScreen(), // Real Home page
     const GoalsScreen(),//goal page
-    const AddTransactionScreen(onTransactionSaved = _transaction),
+    const AddTransactionScreen(),
     const PlaceholderWidget(title: 'Analysis'),
     const PlaceholderWidget(title: 'Profile'),
   ];

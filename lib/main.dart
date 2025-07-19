@@ -39,7 +39,6 @@ class FinanceOptimizerApp extends StatelessWidget {
         '/goalpage':(context)=>BottomNavBar(),
         '/add':(context)=>AddTransactionScreen(),
         '/listtransaction':(context)=>TransactionListScreen(),
-        '/analysis' : (context)=>HomeScreen(),
 
         // '/home': (context) => const HomeScreen(), // Later
       },
