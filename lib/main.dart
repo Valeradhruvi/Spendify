@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:spendify/dashboard/bottom_button/bottom_nav_bar.dart';
+import 'package:spendify/dashboard/screen/analysis_screen.dart';
+import 'package:spendify/dashboard/screen/goal_screen.dart';
+import 'package:spendify/transaction/add_transaction.dart';
+import 'package:spendify/transaction/list_of_transaction.dart';
 import 'package:spendify/user/auth/forgot_pass_screen.dart';
 import 'package:spendify/user/auth/login_screen.dart';
 import 'package:spendify/user/auth/onboarding_screen.dart';
 import 'package:spendify/user/auth/regitser_screen.dart';
 import 'package:spendify/user/auth/splash_screen.dart';
+
+
+
 // import 'screens/home_screen.dart'; // if you've built this
 
 void main() {
@@ -19,13 +27,20 @@ class FinanceOptimizerApp extends StatelessWidget {
       title: 'ML Finance Optimizer',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(), // Use your custom theme here
-      initialRoute: '/splash',
+      initialRoute: '/bottomnav',
       routes: {
         '/splash': (context) =>  SplashScreen(),
         '/onboarding': (context) =>  OnboardingScreen(),
         '/login': (context) =>  LoginScreen(),
         '/forgot': (context) =>  ForgotPasswordScreen(),
         '/register': (context) =>  RegisterScreen(),
+        '/bottomnav':(context)=>BottomNavBar(),
+        '/homepage':(context)=>GoalsScreen(),
+        '/goalpage':(context)=>BottomNavBar(),
+        '/add':(context)=>AddTransactionScreen(),
+        '/listtransaction':(context)=>TransactionListScreen(),
+        '/analysis' : (context)=>HomeScreen(),
+
         // '/home': (context) => const HomeScreen(), // Later
       },
     );

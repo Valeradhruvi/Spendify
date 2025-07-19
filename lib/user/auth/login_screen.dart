@@ -165,7 +165,7 @@ class LoginScreen extends StatelessWidget {
                       ElevatedButton.icon(
                         onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Navigator.pushNamed(context, '/splash');
+                              Navigator.pushNamed(context, '/bottomnav');
                             }
                         },
                         icon: const Icon(Icons.login, color: Colors.white),

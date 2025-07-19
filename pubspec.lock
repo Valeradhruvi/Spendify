@@ -79,7 +79,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_animate:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_animate
       sha256: "7befe2d3252728afb77aecaaea1dec88a89d35b9b1d2eea6d04479e8af9117b5"
@@ -108,7 +108,7 @@ packages:
     source: sdk
     version: "0.0.0"
   glassmorphism:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: glassmorphism
       sha256: c0f65ea2681d4ee6d4125b947946d983335cd44765e835cdc039894b076a6e31
@@ -116,7 +116,7 @@ packages:
     source: hosted
     version: "3.0.0"
   google_fonts:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: google_fonts
       sha256: b1ac0fe2832c9cc95e5e88b57d627c5e68c223b9657f4b96e1487aa9098c7b82
@@ -139,6 +139,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3df61194eb431efc39c4ceba583b95633a403f46c9fd341e550ce0bfa50e9aa5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.2"
   leak_tracker:
     dependency: transitive
     description:

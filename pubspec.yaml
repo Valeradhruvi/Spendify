@@ -30,6 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  google_fonts: ^6.1.0
+  glassmorphism: ^3.0.0
+  flutter_animate:
+  intl:
+
 
 
   # The following adds the Cupertino Icons font to your application.
