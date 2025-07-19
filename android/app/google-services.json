@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "328568344086",
+    "project_id": "spendify-3e369",
+    "storage_bucket": "spendify-3e369.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328568344086:android:c16d65a77d6be7811e2f37",
+        "android_client_info": {
+          "package_name": "com.example.spendify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYq87Xwun2wnUl0U04gigvGc9x5bj5c7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
