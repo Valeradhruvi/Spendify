@@ -36,26 +36,32 @@ class CSVPreviewScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final tx = parsedTransactions[index];
                 final icon = tx.type == 'Expense' ? Icons.remove : Icons.add;
-                final color = tx.type == 'Expense' ? Colors.redAccent : Colors.green;
+                final color =
+                tx.type == 'Expense' ? Colors.redAccent : Colors.green;
 
                 return Card(
                   color: const Color(0xFF162447),
                   margin: const EdgeInsets.symmetric(vertical: 6),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: color.withOpacity(0.2),
                       child: Icon(icon, color: color),
                     ),
-                    title: Text(tx.title, style: GoogleFonts.poppins(color: Colors.white)),
+                    title: Text(tx.title,
+                        style: GoogleFonts.poppins(color: Colors.white)),
                     subtitle: Text(
                       '${tx.category} • ${tx.paymentMethod} • ${tx.date.toLocal().toString().split(" ")[0]}',
-                      style: GoogleFonts.poppins(color: Colors.white70, fontSize: 12),
+                      style: GoogleFonts.poppins(
+                          color: Colors.white70, fontSize: 12),
                     ),
                     trailing: Text(
                       '₹${tx.amount.toStringAsFixed(2)}',
                       style: GoogleFonts.poppins(
-                          color: color, fontWeight: FontWeight.bold, fontSize: 14),
+                          color: color,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14),
                     ),
                   ),
                 );
@@ -68,7 +74,11 @@ class CSVPreviewScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.grey[700]),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[700],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
                     onPressed: () => Navigator.pop(context),
                     child: const Text('Cancel'),
                   ),
@@ -76,10 +86,14 @@ class CSVPreviewScreen extends StatelessWidget {
                 const SizedBox(width: 20),
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00ADB5)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF00ADB5),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
                     onPressed: () {
                       onConfirmImport(parsedTransactions);
-                      Navigator.pop(context); // You can navigate to summary screen here
+                      Navigator.pop(context); // Optionally navigate to summary screen
                     },
                     child: const Text('Import'),
                   ),

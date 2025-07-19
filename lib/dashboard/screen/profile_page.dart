@@ -3,8 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:pdf/pdf.dart';
+import 'package:spendify/dashboard/screen/profileScreens/about_us_screen.dart';
+import 'package:spendify/dashboard/screen/profileScreens/feedback_screen.dart';
+import 'package:spendify/dashboard/screen/profileScreens/help_center.dart';
 import 'package:spendify/model/user_model.dart';
 import 'package:spendify/model/transaction_model.dart';
+import 'package:spendify/user/auth/login_screen.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
@@ -66,7 +70,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/default_user.png'),
+                    // backgroundImage: AssetImage('assets/images/default_user.png'),
                   ),
                   const SizedBox(height: 10),
                   Text(user.username, style: GoogleFonts.poppins(color: Colors.white, fontSize: 20)),
@@ -115,15 +119,22 @@ class ProfilePage extends StatelessWidget {
 
             const SizedBox(height: 20),
             _buildSectionTitle("Support"),
-            _buildTile("Help Center", "", Icons.help_outline, Colors.white70),
-            _buildTile("About This App", "", Icons.info_outline, Colors.white70),
+            _buildTile("Feedback", "", Icons.feedback_outlined, Colors.white70,onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const FeedbackScreen()),);
+            }),
+            _buildTile("Help Center", "", Icons.help_outline, Colors.white70,onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const HelpCenterScreen()),);
+            }),
+            _buildTile("About This App", "", Icons.info_outline, Colors.white70, onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const AboutAppScreen()),);
+            },),
 
             const SizedBox(height: 20),
             Center(
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
                 onPressed: () {
-                  // logout logic
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()),);
                 },
                 icon: const Icon(Icons.logout),
                 label: const Text("Logout"),

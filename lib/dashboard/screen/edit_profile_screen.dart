@@ -102,12 +102,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ElevatedButton(
                   onPressed: _cancelEdit,
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-                  child: const Text("Cancel"),
+                  child: const Text("Cancel", style: TextStyle(color: Colors.black),),
                 ),
                 ElevatedButton(
                   onPressed: _saveChanges,
                   style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF00ADB5)),
-                  child: const Text("Save"),
+                  child: const Text("Save", style: TextStyle(color: Colors.black),),
                 ),
               ],
             )

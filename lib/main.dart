@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:spendify/analysis/expense_prediction_screen.dart';
+import 'package:spendify/analysis/sending_insight_screen.dart' hide AnalyticsChartsScreen;
 import 'package:spendify/bank_sync/banksync_screen.dart';
 import 'package:spendify/dashboard/bottom_button/bottom_nav_bar.dart';
 import 'package:spendify/dashboard/screen/analysis_screen.dart';
 import 'package:spendify/dashboard/screen/edit_profile_screen.dart';
 import 'package:spendify/dashboard/screen/goal_screen.dart';
+import 'package:spendify/dashboard/screen/profileScreens/about_us_screen.dart';
+import 'package:spendify/dashboard/screen/profileScreens/feedback_screen.dart';
+import 'package:spendify/dashboard/screen/profileScreens/help_center.dart';
 import 'package:spendify/dashboard/screen/profile_page.dart';
 import 'package:spendify/notification/notification_screen.dart';
 import 'package:spendify/transaction/add_transaction.dart';
@@ -45,6 +50,10 @@ class FinanceOptimizerApp extends StatelessWidget {
         '/notificationscreen':(context)=>NotificationScreen(),
         '/editprofile':(context)=>EditProfilePage(username: 'darvi',email: 'dh@gail.com'),
         '/banksyncscreen':(context)=>BankSyncScreen(),
+        '/sendinginsightscreen':(context)=>AnalyticsChartsScreen(),
+        '/aboutscreen':(context)=>AboutAppScreen(),
+        '/helpcenterscreen':(context)=>HelpCenterScreen(),
+        '/feedbackscreen':(context)=>FeedbackScreen(),
 
         // '/home': (context) => const HomeScreen(), // Later
       },

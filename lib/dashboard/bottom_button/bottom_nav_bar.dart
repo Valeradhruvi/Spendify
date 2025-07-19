@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:spendify/analysis/expense_prediction_screen.dart';
+import 'package:spendify/analysis/sending_insight_screen.dart' hide AnalyticsChartsScreen;
 import 'package:spendify/dashboard/screen/goal_screen.dart';
 import 'package:spendify/dashboard/screen/home_screen.dart';
 import 'package:spendify/dashboard/screen/profile_page.dart';
@@ -18,8 +20,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages = [
     const HomeScreen(), // Real Home page
     const GoalsScreen(),//goal page
-    const AddTransactionScreen(),
-    const PlaceholderWidget(title: 'Analysis'),
+    const AnalyticsChartsScreen(),
     ProfilePage(),
   ];
 
@@ -59,10 +60,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: Icon(Icons.flag),
               label: 'Goals',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add_circle_outline),
-              label: 'Add',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.add_circle_outline),
+            //   label: 'Add',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(Icons.bar_chart),
               label: 'Analysis',
