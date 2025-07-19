@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spendify/analysis/expense_prediction_screen.dart';
-import 'package:spendify/analysis/sending_insight_screen.dart' hide AnalyticsChartsScreen;
+import 'package:spendify/analysis/sending_insight_screen.dart';
 import 'package:spendify/bank_sync/banksync_screen.dart';
 import 'package:spendify/dashboard/bottom_button/bottom_nav_bar.dart';
 import 'package:spendify/dashboard/screen/analysis_screen.dart';
