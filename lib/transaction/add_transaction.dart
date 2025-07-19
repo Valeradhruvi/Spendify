@@ -19,8 +19,8 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   String? _payment;
   DateTime? _date;
 
-  final List<String> _categories = ['Food', 'Transport', 'Bills', 'Others'];
-  final List<String> _methods = ['Cash', 'Card', 'UPI'];
+  final List<String> _categories = ['Food', 'Travel', 'Shopping', 'Bills', 'Entertainment','Medical','Study','Others'];
+  final List<String> _methods = ['Cash', 'Credit Card','Debit Card','Bank Transfer','Net Banking' 'UPI','Other'];
 
   void _saveTransaction() {
     if (_formKey.currentState!.validate() && _date != null) {
