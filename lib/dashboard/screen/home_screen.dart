@@ -102,16 +102,39 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundColor: color.withOpacity(0.2),
                       child: Icon(icon, color: color),
                     ),
-                    title: Text(tx.title,
-                        style: GoogleFonts.poppins(color: Colors.white)),
+                    title: Text(tx.title, style: GoogleFonts.poppins(color: Colors.white)),
                     subtitle: Text(
-                        '${tx.category} • ${tx.paymentMethod} • ${tx.date.toLocal().toString().split(" ")[0]}',
-                        style: GoogleFonts.poppins(
-                            color: Colors.white70, fontSize: 12)),
-                    trailing: Text(
-                      '${tx.type == "Expense" ? "-" : "+"} ₹${tx.amount.toStringAsFixed(2)}',
-                      style: GoogleFonts.poppins(
-                          color: color, fontWeight: FontWeight.bold),
+                      '${tx.category} • ${tx.paymentMethod} • ${tx.date.toLocal().toString().split(" ")[0]}',
+                      style: GoogleFonts.poppins(color: Colors.white70, fontSize: 12),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit, color: Colors.white70, size: 20),
+                          onPressed: () async {
+                            final updatedTx = await Navigator.push<Transaction>(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => AddTransactionScreen(transaction: tx),
+                              ),
+                            );
+                            if (updatedTx != null) {
+                              setState(() {
+                                transactions[index] = updatedTx;
+                              });
+                            }
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.redAccent, size: 20),
+                          onPressed: () {
+                            setState(() {
+                              transactions.removeAt(index);
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   );
                 },

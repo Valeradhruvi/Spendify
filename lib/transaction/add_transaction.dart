@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 import 'transaction_model.dart';
 
 class AddTransactionScreen extends StatefulWidget {
-  const AddTransactionScreen({super.key});
+  final Transaction? transaction;
+  const AddTransactionScreen({super.key, this.transaction});
 
   @override
   State<AddTransactionScreen> createState() => _AddTransactionScreenState();
@@ -14,16 +15,39 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final _formKey = GlobalKey<FormState>();
   final _title = TextEditingController();
   final _amount = TextEditingController();
+  final _note = TextEditingController();
+
   String _type = "Expense";
   String? _category;
   String? _payment;
   DateTime? _date;
+  String? _dateError;
 
   final List<String> _categories = ['Food', 'Transport', 'Bills', 'Others'];
   final List<String> _methods = ['Cash', 'Card', 'UPI'];
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.transaction != null) {
+      _title.text = widget.transaction!.title;
+      _amount.text = widget.transaction!.amount.toString();
+      _note.text = widget.transaction!.note ?? '';
+      _type = widget.transaction!.type;
+      _category = widget.transaction!.category;
+      _payment = widget.transaction!.paymentMethod;
+      _date = widget.transaction!.date;
+    }
+  }
+
   void _saveTransaction() {
-    if (_formKey.currentState!.validate() && _date != null) {
+    setState(() => _dateError = null);
+    if (_formKey.currentState!.validate()) {
+      if (_date == null) {
+        setState(() => _dateError = 'Please select a date');
+        return;
+      }
+
       final tx = Transaction(
         title: _title.text,
         amount: double.parse(_amount.text),
@@ -31,8 +55,10 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
         date: _date!,
         paymentMethod: _payment!,
         type: _type,
+        note: _note.text,
       );
-      Navigator.pop(context, tx); // Send data back
+
+      Navigator.pop(context, tx);
     }
   }
 
@@ -60,9 +86,16 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                       (val) => setState(() => _category = val)),
               const SizedBox(height: 15),
               _buildDatePicker(),
+              if (_dateError != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Text(_dateError!, style: const TextStyle(color: Colors.redAccent)),
+                ),
               const SizedBox(height: 15),
               _buildDropdown("Payment Method", _methods, _payment,
                       (val) => setState(() => _payment = val)),
+              const SizedBox(height: 15),
+              _buildField(_note, "Note (Optional)"),
               const SizedBox(height: 25),
               ElevatedButton(
                 onPressed: _saveTransaction,
@@ -122,8 +155,12 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
           borderSide: const BorderSide(color: Colors.white24),
         ),
       ),
-      validator: (value) =>
-      (value == null || value.trim().isEmpty) ? 'Required' : null,
+      validator: (value) {
+        if (label == "Note (Optional)") return null;
+        return (value == null || value.trim().isEmpty)
+            ? 'Required'
+            : null;
+      },
     );
   }
 
@@ -164,6 +201,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
               if (picked != null) {
                 setState(() {
                   _date = picked;
+                  _dateError = null;
                 });
               }
             },
