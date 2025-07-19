@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-create(String collName, docName, name, animal, int age) async {
+createData(String collName, docName, username, email, password) async {
   await FirebaseFirestore.instance
       .collection(collName)
       .doc(docName)
-      .set(//here all the feild u want to add
-      {'name': name, 'animal': animal, 'age': age});
+      .set(
+      {'username': username,'email':email, 'password': password , 'income' : '0' , 'spending' : '0' , 'status' : 'active' , 'theme' : 'dark' , 'photoUrl' : ''});
+
   print('Database Updated');
 }
 
-update(String collName, docName, field, var newFieldValue) async {
+updateData(String collName, docName, field, var newFieldValue) async {
   await FirebaseFirestore.instance
       .collection(collName)
       .doc(docName)
@@ -18,7 +19,7 @@ update(String collName, docName, field, var newFieldValue) async {
   print('Fields Updated');
 }
 
-delete(String collName, docName) async {
+deleteData(String collName, docName) async {
   await FirebaseFirestore.instance.collection(collName).doc(docName).delete();
   print('Document Deleted');
 }

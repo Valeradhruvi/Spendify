@@ -1,10 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
-signup(String email, String password) async {
+signup(String email, String password, String name) async {
   try {
     UserCredential userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
+
+    // 👇 Update the display name
+    await userCredential.user!.updateDisplayName(name);
+
+    debugPrint("::::::::::::::::: ${FirebaseAuth.instance.currentUser?.displayName} ::::::::::::::::");
+    print(":::::::::::::::::: success :::::::::::::::::");
+
+    await userCredential.user!.reload(); // Refresh user info
     print('/////// Success ////////');
+    print('Username set to: ${FirebaseAuth.instance.currentUser!.displayName}');
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
       print('The password provided is too weak.');
@@ -15,6 +25,7 @@ signup(String email, String password) async {
     print(e);
   }
 }
+
 
 signin(String email, password) async {
   try {
