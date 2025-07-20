@@ -17,6 +17,45 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   bool _obscurePassword = true;
+  bool _loading = false; // Optionally show spinner during auth
+
+  // --- Helper for Login Action ---
+  Future<void> _handleLogin(BuildContext context) async {
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+
+    // Set loading state (optional UX)
+    setState(() {
+      _loading = true;
+    });
+
+    try {
+      // Optionally authenticate using your authFunctions
+      await signin(email, password);
+
+      // --- ADMIN SHORTCUT LOGIC ---
+      if (email == "admin@admin.com" && password == "admin123") {
+        // Use pushReplacementNamed to prevent "back" to login page
+        Navigator.pushReplacementNamed(context, '/admindashboard');
+      } else {
+        Navigator.pushReplacementNamed(context, '/bottomnavbar');
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Login failed: ${e.toString()}",
+            style: GoogleFonts.poppins(color: Colors.white),
+          ),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-
             // Top Wave Animation
             Align(
               alignment: Alignment.topCenter,
@@ -66,7 +104,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ).animate().slideY(duration: 900.ms).fadeIn(),
             ),
-
             // Glassmorphic Form
             Center(
               child: GlassmorphicContainer(
@@ -124,7 +161,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       const SizedBox(height: 20),
-
                       // Password Field with Toggle
                       TextFormField(
                         controller: passwordController,
@@ -179,18 +215,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-
                       const SizedBox(height: 10),
 
-                      // Login Button
+                      // LOGIN BUTTON (with loading spinner)
                       ElevatedButton.icon(
-                        onPressed: () {
+                        onPressed: _loading
+                            ? null
+                            : () {
                           if (_formKey.currentState!.validate()) {
-                            signin(emailController.text.trim(), passwordController.text.trim());
-                            Navigator.pushNamed(context, '/bottomnavbar');
+                            _handleLogin(context);
                           }
                         },
-                        icon: const Icon(Icons.login, color: Colors.white),
+                        icon: _loading
+                            ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                            strokeWidth: 2,
+                          ),
+                        )
+                            : const Icon(Icons.login, color: Colors.white),
                         label: const Text(
                           "Login",
                           style: TextStyle(fontSize: 16, color: Colors.white),
@@ -203,7 +248,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ).animate().fadeIn(delay: 300.ms),
-
                       const SizedBox(height: 10),
 
                       const Text("Or sign in with", style: TextStyle(color: Colors.white70)),
@@ -223,7 +267,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
-
                       const SizedBox(height: 10),
 
                       TextButton(

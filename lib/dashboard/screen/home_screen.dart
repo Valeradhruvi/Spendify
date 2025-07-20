@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:spendify/functions/database_fucntions.dart';
 import 'package:spendify/transaction/add_transaction.dart';
-import 'package:spendify/transaction/transaction_model.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   void _navigateAndAddTransaction() async {
-    final newTransaction = await Navigator.push<Transactions>(
+    final newTransaction = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const AddTransactionScreen(),

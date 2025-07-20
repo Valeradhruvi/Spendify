@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'transaction_model.dart';
+import 'package:spendify/model/transaction_model.dart';
+
 
 class TransactionService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

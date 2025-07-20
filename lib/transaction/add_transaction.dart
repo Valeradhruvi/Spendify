@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:spendify/functions/database_fucntions.dart';
-import 'transaction_model.dart';
+
+import '../model/transaction_model.dart';
+
 
 class AddTransactionScreen extends StatefulWidget {
   final Transactions? transaction;
@@ -66,7 +68,6 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
       }
 
       final user = FirebaseAuth.instance.currentUser;
-
       if (user != null) {
         await createTransactionData(
           userId: userId,

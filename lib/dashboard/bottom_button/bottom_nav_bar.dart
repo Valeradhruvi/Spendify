@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:spendify/dashboard/screen/goal_screen.dart';
 import 'package:spendify/dashboard/screen/home_screen.dart';
-
+import 'package:spendify/dashboard/screen/profile_page.dart';
 import 'package:spendify/transaction/add_transaction.dart';
+import '../screen/analysis_screen.dart';
+
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -19,9 +21,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const HomeScreen(), // Real Home page
     const GoalsScreen(),//goal page
     const AddTransactionScreen(),
-    const PlaceholderWidget(title: 'Analysis'),
-    const PlaceholderWidget(title: 'Profile'),
-
+    const AnalyticsChartsScreen(),
+    ProfilePage(),
   ];
 
   @override
